@@ -101,14 +101,9 @@ def criando_arquivo(cts_problema, dados):
     df = pd.DataFrame(cts_problema)
     de = pd.DataFrame(dados)
     try:
-        arquivo = pd.ExcelWriter("Dados_contabilizados.xlsx")
-    except:
-        print("Erro na abertura de arquivo")
-        print("\nVerifique se o arquivo está aberto\n")
-    try:
-        de.to_excel(arquivo, sheet_name='TODOS OS CTs')
-        df.to_excel(arquivo, sheet_name='CTs DE NÃO CONFORMIDADE')
-        arquivo.save()
+        with pd.ExcelWriter("Resultado_Programa.xlsx") as writer:
+            de.to_excel(writer, sheet_name="Todos os CTs")  
+            df.to_excel(writer, sheet_name="CTs de Não Conformidade")  
     except:
         print("\nErro em colocar os dados no arquivo do arquivo")
         print("\nVerifique se o arquivo está aberto\n")
